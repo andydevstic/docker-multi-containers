@@ -6,13 +6,13 @@ before_install:
   - docker build -t andydevstic/react-test -f ./client/Dockerfile.dev .
 
 scripts:
-  - docker run -e CI=true react-test npm test
+  - docker run -e CI=true andydevstic/react-test npm test
 
 after_success:
   - docker build -t andydevstic/multi-client ./client
   - docker build -t andydevstic/multi-nginx ./nginx
   - docker build -t andydevstic/multi-server ./server
-  - docker build -t andydevstic/multi-worker ./
+  - docker build -t andydevstic/multi-worker ./worker
   # Login to Ddocker CLI.
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Setup encrypted env on travis ci
